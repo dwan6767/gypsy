@@ -9,34 +9,31 @@
 <div id="espContent"></div>
 
 <script>
-  async function loadESPContent() {
-    const container = document.getElementById('espContent');
-    try {
-      const resp = await fetch('/api/update');
-      const data = await resp.json();
+async function loadESPContent() {
+  const container = document.getElementById('espContent');
+  try {
+    // Try to fetch directly from the ESP URL (replace with your ESP IP/endpoint)
+    const resp = await fetch('http://192.168.0.149'); 
+    if (!resp.ok) throw new Error("ESP offline");
+    const html = await resp.text();
+    container.innerHTML = html;
 
-      if(data.html && data.html.trim() !== "") {
-        container.innerHTML = data.html;
+    // Execute inline scripts
+    container.querySelectorAll('script').forEach(oldScript => {
+      const newScript = document.createElement('script');
+      if (oldScript.src) newScript.src = oldScript.src;
+      else newScript.textContent = oldScript.textContent;
+      document.body.appendChild(newScript);
+    });
 
-        // Execute any inline scripts
-        const scripts = container.querySelectorAll('script');
-        scripts.forEach(oldScript => {
-          const newScript = document.createElement('script');
-          if(oldScript.src) newScript.src = oldScript.src;
-          else newScript.textContent = oldScript.textContent;
-          document.body.appendChild(newScript);
-        });
-      } else {
-        container.innerHTML = '';
-      }
-    } catch (e) {
-      container.innerHTML = '';
-    }
+  } catch (e) {
+    container.innerHTML = ""; // clear if ESP offline
   }
+}
 
-  loadESPContent();
-  setInterval(loadESPContent, 3000);
+// Refresh every 3 seconds
+loadESPContent();
+setInterval(loadESPContent, 3000);
 </script>
 </body>
 </html>
-
