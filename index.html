@@ -6,31 +6,33 @@
   <title>ESP Live Content</title>
 </head>
 <body>
-  <div id="espContent"></div>
+  <div id="espContent">Loading ESP content...</div>
 
   <script>
     async function loadESPContent() {
+      const container = document.getElementById('espContent');
       try {
-        const resp = await fetch('/api/update'); // ESP posts JSON {"html":"..."}
+        const resp = await fetch('/api/update');
+        if (!resp.ok) throw new Error('ESP offline');
         const data = await resp.json();
-        const container = document.getElementById('espContent');
-        container.innerHTML = data.html;
+        container.innerHTML = data.html || "<p>No data yet</p>";
 
-        // Execute inline scripts
-        const scripts = container.querySelectorAll('script');
-        scripts.forEach(oldScript => {
+        // Run any inline scripts from ESP HTML
+        container.querySelectorAll('script').forEach(oldScript => {
           const newScript = document.createElement('script');
-          if(oldScript.src) newScript.src = oldScript.src;
+          if (oldScript.src) newScript.src = oldScript.src;
           else newScript.textContent = oldScript.textContent;
           document.body.appendChild(newScript);
         });
       } catch (e) {
-        console.error('Error loading ESP content', e);
+        container.innerHTML = '<p style="color:red;text-align:center;margin-top:50px;">ESP Offline</p>';
       }
     }
 
+    // Initial load
     loadESPContent();
+    // Poll every 5 seconds
+    setInterval(loadESPContent, 5000);
   </script>
 </body>
 </html>
-
