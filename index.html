@@ -3,36 +3,40 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ESP Live Content</title>
+  <title>ESP Live</title>
 </head>
 <body>
-  <div id="espContent">Loading ESP content...</div>
+  <div id="espContent"></div>
 
   <script>
-    async function loadESPContent() {
-      const container = document.getElementById('espContent');
-      try {
-        const resp = await fetch('/api/update');
-        if (!resp.ok) throw new Error('ESP offline');
-        const data = await resp.json();
-        container.innerHTML = data.html || "<p>No data yet</p>";
+    const INTERVAL = 5000; // refresh every 5 seconds
+    const OFFLINE_HTML = '/offline.html';
 
-        // Run any inline scripts from ESP HTML
-        container.querySelectorAll('script').forEach(oldScript => {
+    async function loadESPContent() {
+      try {
+        const resp = await fetch('/api/update', {cache: "no-store"});
+        if (!resp.ok) throw new Error("ESP offline");
+
+        const data = await resp.json();
+        const container = document.getElementById('espContent');
+        container.innerHTML = data.html;
+
+        // Execute inline scripts
+        const scripts = container.querySelectorAll('script');
+        scripts.forEach(oldScript => {
           const newScript = document.createElement('script');
-          if (oldScript.src) newScript.src = oldScript.src;
+          if(oldScript.src) newScript.src = oldScript.src;
           else newScript.textContent = oldScript.textContent;
           document.body.appendChild(newScript);
         });
       } catch (e) {
-        container.innerHTML = '<p style="color:red;text-align:center;margin-top:50px;">ESP Offline</p>';
+        console.warn("ESP offline, loading offline page");
+        window.location.href = OFFLINE_HTML; // redirect to offline.html
       }
     }
 
-    // Initial load
     loadESPContent();
-    // Poll every 5 seconds
-    setInterval(loadESPContent, 5000);
+    setInterval(loadESPContent, INTERVAL);
   </script>
 </body>
 </html>
