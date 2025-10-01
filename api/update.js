@@ -1,4 +1,6 @@
 // api/update.js
+
+// Store the latest HTML sent by ESP
 let latestHTML = `
 <!DOCTYPE html>
 <html>
@@ -14,25 +16,32 @@ let latestHTML = `
 <body>
   <h1>No data yet</h1>
   <p id="time"></p>
-  <script>
-    setInterval(() => {
-      const now = new Date();
-      document.getElementById('time').innerText = now.toLocaleTimeString();
-    }, 1000);
-  </script>
 </body>
 </html>
 `;
 
-export default function handler(req, res) {
+export default async function handler(req, res) {
   if (req.method === "POST") {
-    // ESP8266 sends JSON: { "html": "<html>...</html>" }
-    latestHTML = req.body.html || latestHTML;
-    res.status(200).json({ message: "HTML received" });
+    try {
+      // Parse JSON body
+      const data = req.body;
+      // If Vercel parses JSON automatically, req.body is object
+      // Otherwise, use: const data = JSON.parse(req.body);
+
+      if (data.html) {
+        latestHTML = data.html;
+        res.status(200).json({ message: "HTML received" });
+      } else {
+        res.status(400).json({ message: "Missing html field" });
+      }
+    } catch (err) {
+      res.status(400).json({ message: "Invalid JSON" });
+    }
   } else if (req.method === "GET") {
+    // Serve the latest HTML
     res.setHeader("Content-Type", "text/html");
     res.status(200).send(latestHTML);
   } else {
-    res.status(405).send("Method Not Allowed");
+    res.status(405).send("Method Not Allowed"); 
   }
 }
