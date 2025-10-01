@@ -1,39 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ESP Live Content</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ESP Live Content</title>
 </head>
 <body>
-<div id="espContent"></div>
+  <div id="espContent">Loading ESP content...</div>
 
-<script>
-async function loadESPContent() {
-  const container = document.getElementById('espContent');
-  try {
-    // Try to fetch directly from the ESP URL (replace with your ESP IP/endpoint)
-    const resp = await fetch('http://192.168.0.149'); 
-    if (!resp.ok) throw new Error("ESP offline");
-    const html = await resp.text();
-    container.innerHTML = html;
+  <script>
+    async function loadESPContent() {
+      const container = document.getElementById('espContent');
+      try {
+        const resp = await fetch('/api/update');
+        if (!resp.ok) throw new Error('ESP offline');
+        const data = await resp.json();
+        container.innerHTML = data.html || "<p>No data yet</p>";
 
-    // Execute inline scripts
-    container.querySelectorAll('script').forEach(oldScript => {
-      const newScript = document.createElement('script');
-      if (oldScript.src) newScript.src = oldScript.src;
-      else newScript.textContent = oldScript.textContent;
-      document.body.appendChild(newScript);
-    });
+        // Run any inline scripts from ESP HTML
+        container.querySelectorAll('script').forEach(oldScript => {
+          const newScript = document.createElement('script');
+          if (oldScript.src) newScript.src = oldScript.src;
+          else newScript.textContent = oldScript.textContent;
+          document.body.appendChild(newScript);
+        });
+      } catch (e) {
+        container.innerHTML = '<p style="color:red;text-align:center;margin-top:50px;">ESP Offline</p>';
+      }
+    }
 
-  } catch (e) {
-    container.innerHTML = ""; // clear if ESP offline
-  }
-}
-
-// Refresh every 3 seconds
-loadESPContent();
-setInterval(loadESPContent, 3000);
-</script>
+    // Initial load
+    loadESPContent();
+    // Poll every 5 seconds
+    setInterval(loadESPContent, 5000);
+  </script>
 </body>
 </html>
