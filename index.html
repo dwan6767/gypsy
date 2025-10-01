@@ -2,9 +2,20 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>ESP Dashboard</title>
+  <title>ESP Live Page</title>
 </head>
 <body>
+  <p>Loading live content...</p>
+  <script>
+    fetch('/api/update')
+      .then(r => r.text())
+      .then(html => {
+        document.open();
+        document.write(html);
+        document.close();
+      })
+      .catch(e => console.error(e));
+  </script>
 </body>
 </html>
 
