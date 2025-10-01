@@ -4,13 +4,30 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ESP Live</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+    }
+    #offlineMessage { display: none; color: #f55; }
+  </style>
 </head>
 <body>
   <div id="espContent"></div>
+  <div id="offlineMessage">
+    <h1>⚠ ESP8266 Offline</h1>
+    <p>The live content is unavailable.</p>
+  </div>
 
   <script>
-    const INTERVAL = 5000; // refresh every 5 seconds
-    const OFFLINE_HTML = '/offline.html';
+    const INTERVAL = 5000; // 5 seconds
 
     async function loadESPContent() {
       try {
@@ -19,7 +36,11 @@
 
         const data = await resp.json();
         const container = document.getElementById('espContent');
+        const offlineDiv = document.getElementById('offlineMessage');
+
         container.innerHTML = data.html;
+        offlineDiv.style.display = 'none';
+        container.style.display = 'block';
 
         // Execute inline scripts
         const scripts = container.querySelectorAll('script');
@@ -29,13 +50,19 @@
           else newScript.textContent = oldScript.textContent;
           document.body.appendChild(newScript);
         });
+
       } catch (e) {
-        console.warn("ESP offline, loading offline page");
-        window.location.href = OFFLINE_HTML; // redirect to offline.html
+        console.warn("ESP offline");
+        const container = document.getElementById('espContent');
+        const offlineDiv = document.getElementById('offlineMessage');
+        container.style.display = 'none';
+        offlineDiv.style.display = 'block';
       }
     }
 
+    // Initial load
     loadESPContent();
+    // Refresh every INTERVAL
     setInterval(loadESPContent, INTERVAL);
   </script>
 </body>
