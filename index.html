@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ESP8266 Demo</title>
+</head>
+<body>
+  <h1>ESP8266 Live Data</h1>
+  <p>Latest data from ESP8266:</p>
+  <pre id="data">Loading...</pre>
+
+  <script>
+    async function fetchData() {
+      try {
+        const res = await fetch('/api/update');
+        const json = await res.json();
+        document.getElementById('data').innerText = JSON.stringify(json, null, 2);
+      } catch (err) {
+        document.getElementById('data').innerText = "Error fetching data";
+      }
+    }
+
+    fetchData();
+    setInterval(fetchData, 5000); // refresh every 5s
+  </script>
+</body>
+</html>
+
