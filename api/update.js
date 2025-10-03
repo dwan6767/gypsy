@@ -1,23 +1,15 @@
-// api/update.js
-
-export const config = {
-  api: { bodyParser: true }
-};
-
-let latestHTML = "<p>No data yet</p>";
+let messages = []; // in-memory storage (last 100 messages)
 
 export default function handler(req, res) {
-  if (req.method === "POST") {
-    console.log("Received POST:", req.body); // check Vercel logs
-    const data = req.body;
-    if (data && data.html) {
-      latestHTML = data.html;
-      return res.status(200).json({ message: "HTML received" });
+  if (req.method === 'POST') {
+    const { user, msg } = req.body;
+    if(user && msg){
+      messages.push({ user, msg });
+      if (messages.length > 100) messages.shift(); // keep last 100 messages
     }
-    return res.status(400).json({ message: "Missing html field" });
-  } else if (req.method === "GET") {
-    return res.status(200).json({ html: latestHTML });
+    res.status(200).json({ status: 'ok' });
   } else {
-    return res.status(405).json({ message: "Method Not Allowed" });
+    res.status(405).end();
   }
 }
+
