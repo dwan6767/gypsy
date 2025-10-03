@@ -1,10 +1,7 @@
-let messages = []; // same in-memory messages (or shared DB)
+// /api/messages.js
+import { messages } from './update.js'; // reuse same in-memory array
 
 export default function handler(req, res) {
-  if (req.method === 'GET') {
-    res.status(200).json(messages);
-  } else {
-    res.status(405).end();
-  }
+  res.status(200).json(messages);
 }
 
