@@ -1,9 +1,5 @@
 {
   "name": "gypsy",
   "version": "1.0.0",
-  "type": "module",
-  "scripts": {
-    "start": "vercel dev"
-  },
-  "dependencies": {}
+  "type": "module"
 }

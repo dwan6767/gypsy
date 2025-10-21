@@ -1,20 +1,21 @@
-// api/set.js
-let currentUrl = null;
+import fs from 'fs';
+import path from 'path';
 
-export default function handler(req, res) {
-  if (req.method === 'POST') {
+const file = path.resolve('/tmp/url.json');
+
+export default async function handler(req, res) {
+  if (req.method !== 'POST') {
+    res.status(405).send('Method not allowed');
+    return;
+  }
+
+  try {
     const { url } = req.body;
-    if (!url) return res.status(400).json({ error: 'Missing URL' });
-    currentUrl = url;
-    console.log('🔗 New ngrok URL:', url);
-    return res.status(200).json({ success: true, url });
-  } 
-  else if (req.method === 'GET') {
-    if (!currentUrl) return res.status(404).json({ error: 'No URL set yet' });
-    return res.status(200).json({ url: currentUrl });
-  } 
-  else {
-    res.status(405).end();
+    if (!url) return res.status(400).send('Missing URL');
+    fs.writeFileSync(file, JSON.stringify({ url }));
+    res.status(200).json({ success: true, url });
+  } catch (err) {
+    res.status(500).send('Error: ' + err.message);
   }
 }
 
