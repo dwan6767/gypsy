@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kakbus | Login</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="supabase.js"></script>
+</head>
+<body>
+  <nav>
+    <a href="index.html" class="logo">Kakbus</a>
+    <div>
+      <a href="index.html">Home</a>
+      <a href="products.html">Products</a>
+      <a href="auth.html" class="active">Login</a>
+    </div>
+  </nav>
+
+  <section class="auth-box">
+    <h2 id="form-title">Login</h2>
+    <form id="auth-form">
+      <input type="email" id="email" placeholder="Email" required />
+      <input type="password" id="password" placeholder="Password" required />
+      <button type="submit">Login</button>
+      <p id="toggle">No account? <a href="#" id="switch">Register</a></p>
+    </form>
+    <p id="message"></p>
+  </section>
+</body>
+</html>
