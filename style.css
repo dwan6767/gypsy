@@ -94,3 +94,22 @@ button:hover {
   margin-top: 1rem;
   color: green;
 }
+.user-info {
+  font-size: 0.9rem;
+  color: #444;
+  margin-right: 1rem;
+}
+
+.logout-btn {
+  background: #ff5252;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.logout-btn:hover {
+  background: #e64040;
+}
