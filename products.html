@@ -6,15 +6,18 @@
   <title>Kakbus | Products</title>
   <link rel="stylesheet" href="style.css" />
 </head>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase.js"></script>
+
 <body>
-  <nav>
-    <a href="index.html" class="logo">Kakbus</a>
-    <div>
-      <a href="index.html">Home</a>
-      <a href="products.html" class="active">Products</a>
-      <a href="auth.html">Login</a>
-    </div>
-  </nav>
+ <nav>
+  <a href="index.html" class="logo">Kakbus</a>
+  <div id="nav-links">
+    <a href="index.html">Home</a>
+    <a href="products.html">Products</a>
+    <a href="auth.html" id="login-link">Login</a>
+  </div>
+</nav>
 
   <section class="products">
     <h2>Our Prototypes</h2>
