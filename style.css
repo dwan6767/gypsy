@@ -1,8 +1,8 @@
-body {
+bbody {
   margin: 0;
-  font-family: 'Inter', sans-serif;
-  color: #222;
+  font-family: "Inter", sans-serif;
   background: #fafafa;
+  color: #222;
 }
 
 nav {
@@ -11,7 +11,7 @@ nav {
   align-items: center;
   padding: 1rem 2rem;
   background: #fff;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
 }
 
 nav a {
@@ -21,7 +21,8 @@ nav a {
   font-weight: 500;
 }
 
-nav a.active, nav a:hover {
+nav a:hover,
+nav a.active {
   color: #0070f3;
 }
 
@@ -33,11 +34,6 @@ nav a.active, nav a:hover {
 .hero {
   text-align: center;
   padding: 4rem 2rem;
-}
-
-.hero h1 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
 }
 
 .products {
@@ -54,7 +50,7 @@ nav a.active, nav a:hover {
   background: #fff;
   border-radius: 12px;
   padding: 1.5rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .auth-box {
@@ -63,7 +59,7 @@ nav a.active, nav a:hover {
   background: #fff;
   padding: 2rem;
   border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
 }
 
@@ -87,13 +83,9 @@ button {
 }
 
 button:hover {
-  background: #0059c1;
+  background: #005ad1;
 }
 
-#message {
-  margin-top: 1rem;
-  color: green;
-}
 .user-info {
   font-size: 0.9rem;
   color: #444;
@@ -107,9 +99,14 @@ button:hover {
   border-radius: 6px;
   padding: 0.4rem 0.8rem;
   cursor: pointer;
-  transition: 0.2s;
 }
 
 .logout-btn:hover {
   background: #e64040;
+}
+
+#message {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: green;
 }
