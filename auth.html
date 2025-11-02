@@ -1,32 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kakbus | Login</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Kakbus — Login / Register</title>
   <link rel="stylesheet" href="style.css" />
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script defer src="supabase.js"></script>
 </head>
-<body>
+<body class="dark">
   <nav>
     <a href="index.html" class="logo">Kakbus</a>
     <div id="nav-links">
       <a href="index.html">Home</a>
       <a href="products.html">Products</a>
-      <a href="auth.html" class="active">Login</a>
+      <a href="auth.html" class="active" id="login-link">Login</a>
     </div>
   </nav>
 
-  <section class="auth-box">
-    <h2 id="form-title">Login</h2>
-    <form id="auth-form">
-      <input type="email" id="email" placeholder="Email" required />
-      <input type="password" id="password" placeholder="Password" required />
-      <button type="submit">Login</button>
-      <p id="toggle">No account? <a href="#" id="switch">Register</a></p>
-    </form>
-    <p id="message"></p>
-  </section>
+  <main class="container">
+    <section class="auth-panel glass">
+      <h2 id="form-title">Login</h2>
+
+      <form id="auth-form" class="form">
+        <!-- Username & avatar are shown only when registering (JS toggles) -->
+        <input id="name" type="text" placeholder="Display name (optional)" class="hidden-field" />
+        <label id="avatar-label" class="hidden-field avatar-label">
+          <span class="small muted">Choose avatar/logo (optional)</span>
+          <input id="avatar" type="file" accept="image/*" />
+        </label>
+
+        <input id="email" type="email" placeholder="Email" required />
+        <input id="password" type="password" placeholder="Password (min 6 chars)" required />
+
+        <button type="submit" id="submit-btn" class="btn">Login</button>
+
+        <p class="muted tiny" id="toggle">No account? <a href="#" id="switch">Register</a></p>
+        <p id="message" class="message"></p>
+      </form>
+    </section>
+  </main>
 </body>
 </html>

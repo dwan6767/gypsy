@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kakbus | Low Power Computing</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Kakbus — Low-Power Computing</title>
   <link rel="stylesheet" href="style.css" />
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script defer src="supabase.js"></script>
 </head>
-<body>
+<body class="dark">
   <nav>
     <a href="index.html" class="logo">Kakbus</a>
     <div id="nav-links">
@@ -18,9 +18,30 @@
     </div>
   </nav>
 
-  <section class="hero">
-    <h1>Building the Future of Low-Power Computing</h1>
-    <p>A group of engineers exploring energy-efficient systems for a sustainable digital world.</p>
-  </section>
+  <main class="container">
+    <section class="hero glass">
+      <h1>Low-Power Computing, engineered.</h1>
+      <p class="muted">Kakbus is a small group of engineers building ultra energy-efficient hardware and software for the edge.</p>
+      <div class="cta-row">
+        <a class="btn" href="products.html">View Prototypes</a>
+        <a class="btn ghost" href="auth.html">Join the Team</a>
+      </div>
+    </section>
+
+    <section class="cards">
+      <article class="card">
+        <h3>K1 Micro Core</h3>
+        <p class="muted">A compact RISC-V core optimized for milliwatt operation.</p>
+      </article>
+      <article class="card">
+        <h3>NanoCompute Board</h3>
+        <p class="muted">Edge AI board designed to run real workloads under 1W.</p>
+      </article>
+      <article class="card">
+        <h3>EcoMesh Network</h3>
+        <p class="muted">Low-power mesh for scalable IoT telemetry.</p>
+      </article>
+    </section>
+  </main>
 </body>
 </html>

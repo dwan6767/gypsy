@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Kakbus — Profile</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="supabase.js"></script>
+</head>
+<body class="dark">
+  <nav>
+    <a href="index.html" class="logo">Kakbus</a>
+    <div id="nav-links">
+      <a href="index.html">Home</a>
+      <a href="products.html">Products</a>
+      <a href="auth.html" id="login-link">Login</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <section class="profile-panel glass">
+      <h2>Your profile</h2>
+
+      <div id="profile-area" class="profile-area">
+        <!-- Filled by JS -->
+        <div class="profile-left">
+          <img id="profile-avatar" class="avatar-large" src="" alt="avatar" />
+          <p id="profile-email" class="muted"></p>
+        </div>
+
+        <form id="profile-form" class="profile-form">
+          <label>Display name
+            <input id="profile-name" type="text" />
+          </label>
+
+          <label>Change avatar
+            <input id="profile-avatar-input" type="file" accept="image/*" />
+          </label>
+
+          <div class="row">
+            <button id="save-profile" class="btn">Save</button>
+            <button id="delete-avatar" class="btn ghost danger" type="button">Remove avatar</button>
+          </div>
+
+          <p id="profile-message" class="message"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

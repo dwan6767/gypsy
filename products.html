@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kakbus | Products</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Kakbus — Products</title>
   <link rel="stylesheet" href="style.css" />
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script defer src="supabase.js"></script>
 </head>
-<body>
+<body class="dark">
   <nav>
     <a href="index.html" class="logo">Kakbus</a>
     <div id="nav-links">
@@ -18,22 +18,25 @@
     </div>
   </nav>
 
-  <section class="products">
-    <h2>Our Prototypes</h2>
-    <div class="grid">
+  <main class="container">
+    <h2 class="page-title">Prototypes</h2>
+
+    <section class="grid">
       <div class="card">
         <h3>K1 Micro Core</h3>
-        <p>Low-power RISC-V prototype chip.</p>
+        <p class="muted">A compact RISC-V core optimized for milliwatt operation.</p>
       </div>
+
       <div class="card">
         <h3>NanoCompute Board</h3>
-        <p>Embedded edge AI board consuming less than 1W.</p>
+        <p class="muted">Edge AI board designed to run real workloads under 1W.</p>
       </div>
+
       <div class="card">
         <h3>EcoMesh Network</h3>
-        <p>Ultra-efficient distributed IoT mesh system.</p>
+        <p class="muted">Low-power mesh for scalable IoT telemetry.</p>
       </div>
-    </div>
-  </section>
+    </section>
+  </main>
 </body>
 </html>
