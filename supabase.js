@@ -1,5 +1,6 @@
-const SUPABASE_URL = "https://YOUR_PROJECT.supabase.co";
-const SUPABASE_KEY = "YOUR_ANON_KEY";
+
+const SUPABASE_URL = "https://tsufiyvxbivlkolwzsji.supabase.co";
+const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRzdWZpeXZ4Yml2bGtvbHd6c2ppIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjAzOTA0MzgsImV4cCI6MjA3NTk2NjQzOH0.7eWJeS4PFAE7bf-rQPc8cWjyqoPtLfYF-ccZ8BQHl_8";
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 const form = document.getElementById("auth-form");
